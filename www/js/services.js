@@ -3,7 +3,7 @@
 /* Services */
 
 // Simple value service.
-angular.module('myApp.services', []).
+angular.module('calcnumerico.services', []).
   value('version', '0.1');
 
 // phonegap ready service - listens to deviceready
