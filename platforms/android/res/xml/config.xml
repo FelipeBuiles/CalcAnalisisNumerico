@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="co.edu.eafit.calcnumerico" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Hello Cordova</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
@@ -10,7 +10,7 @@
     <feature name="App">
         <param name="android-package" value="org.apache.cordova.App" />
     </feature>
-    <name>CalcNumAnalysis</name>
+    <name>Aguacate</name>
     <description>
         Implementation of various methods as seen on Numerical Analysis course at EAFIT
     </description>

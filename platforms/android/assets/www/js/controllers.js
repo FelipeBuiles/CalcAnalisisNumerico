@@ -17,6 +17,10 @@ function HomeCtrl($scope,navSvc,$rootScope) {
     };
 }
 
+function IncrementalSearchCtrl($scope) {
+    $scope.equation = $scope.eq_a + " lol";
+}
+
 function NotificationCtrl($scope) {
     $scope.alertNotify = function() {
         navigator.notification.alert("Sample Alert",function() {console.log("Alert success")},"My Alert","Close");

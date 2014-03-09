@@ -1,1 +1,1 @@
- : /home/pipe/Documents/Org/CalcAnalisisNumerico/platforms/android/CordovaLib/bin/AndroidManifest.xml \
+ : C:\Users\Felipe\Documents\GitHub\CalcAnalisisNumerico\platforms\android\CordovaLib\bin\AndroidManifest.xml \
