@@ -13,8 +13,19 @@
         </a>
     </div>
 </div>
-<div>
-	<p>
-		{{ test }}
-	</p>
+<div class="input">
+	<br>
+	<form ng-submit="calculate()">
+		<label>N. Iterations:</label>
+		<input type="text" ng-model="nIter"></input><br>
+		<label>Random Start:</label>
+		<input type="text" ng-model="x0"></input><br>
+		<label>Delta:</label>
+		<input type="text" ng-model="delta"></input><br>
+		<label>Equation:</label>
+		<label>x^3+15=0</label>
+		<input class="topcoat-button" type="submit" value="DO EET">
+	</form>
+	<hr>
+	<h2>{{ root }}</h2>
 </div>
