@@ -109,3 +109,6 @@ UpgradeLog*.XML
 
 # Phonegap compiled objects
 platforms/
+build/
+.cordova/
+plugins/
