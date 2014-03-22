@@ -16,16 +16,19 @@
 <div class="input">
 	<br>
 	<form ng-submit="calculate()">
-		<label>N. Iterations:</label>
-		<input type="text" ng-model="nIter"></input><br>
-		<label>Random Start:</label>
-		<input type="text" ng-model="x0"></input><br>
-		<label>Delta:</label>
-		<input type="text" ng-model="delta"></input><br>
-		<label>Equation:</label>
-		<label>x^3+15=0</label>
+		<dl>
+			<dt><label>Equation:</label></dt>
+			<dd><input type="text" class="topcoat-text-input" ng-model="equation"></input></dd>
+			<dt><label>N. Iterations:</label></dt>
+			<dd><input type="text" class="topcoat-text-input" ng-model="nIter"></input><br></dd>
+			<dt><label>Random Start:</label></dt>
+			<dd><input type="text" class="topcoat-text-input" ng-model="x0"></input></dd>
+			<dt><label>Delta:</label></dt>
+			<dd><input type="text" class="topcoat-text-input" ng-model="delta"></input></dd>
+		</dl>
+
 		<input class="topcoat-button" type="submit" value="DO EET">
 	</form>
 	<hr>
-	<h2>{{ root }}</h2>
+	<h1>{{ root }}</h1>
 </div>

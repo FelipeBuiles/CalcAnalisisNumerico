@@ -12,8 +12,17 @@ var myApp = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.d
         $compileProvider.urlSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
     })
     .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/', {templateUrl: 'partials/homeView.html', controller: 'HomeCtrl'});
-        $routeProvider.when('/incrementalSearch', {templateUrl: 'partials/incrementalSearchView.html', controller: 'IncrementalSearchCtrl'});
-        $routeProvider.when('/bisection', {templateUrl: 'partials/bisectionView.html', controller: 'BisectionCtrl'});
+        $routeProvider.when('/',                    
+            {templateUrl: 'partials/homeView.html', 
+             controller: 'HomeCtrl'});
+        $routeProvider.when('/incrementalSearch',   
+            {templateUrl: 'partials/incrementalSearchView.html', 
+             controller: 'IncrementalSearchCtrl'});
+        $routeProvider.when('/bisection', 
+            {templateUrl: 'partials/bisectionView.html', 
+             controller: 'BisectionCtrl'});
+        $routeProvider.when('/falsePosition',
+            {templateUrl: 'partials/falsePositionView.html',
+             controller: 'FalsePositionCtrl'});
         $routeProvider.otherwise({redirectTo: '/'});
   }]);
