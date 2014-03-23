@@ -24,5 +24,17 @@ var myApp = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.d
         $routeProvider.when('/falsePosition',
             {templateUrl: 'partials/falsePositionView.html',
              controller: 'FalsePositionCtrl'});
+        $routeProvider.when('/fixedPoint',
+            {templateUrl: 'partials/fixedPointView.html',
+             controller: 'FixedPointCtrl'});
+        $routeProvider.when('/newton',
+            {templateUrl: 'partials/newtonView.html',
+             controller: 'NewtonCtrl'});
+        $routeProvider.when('/secant',
+            {templateUrl: 'partials/secantView.html',
+             controller: 'SecantCtrl'});     
+        $routeProvider.when('/multipleRoots',
+            {templateUrl: 'partials/multipleRootsView.html',
+             controller: 'MultipleRootsCtrl'});                                            
         $routeProvider.otherwise({redirectTo: '/'});
   }]);

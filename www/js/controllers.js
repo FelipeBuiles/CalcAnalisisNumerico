@@ -154,3 +154,19 @@ function FalsePositionCtrl($scope) {
         }
     }
 }
+
+function FixedPointCtrl($scope) {
+
+}
+
+function NewtonCtrl($scope) {
+
+}
+
+function SecantCtrl($scope) {
+
+}
+
+function MultipleRootsCtrl($scope) {
+
+}
