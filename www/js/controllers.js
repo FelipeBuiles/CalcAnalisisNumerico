@@ -156,7 +156,35 @@ function FalsePositionCtrl($scope) {
 }
 
 function FixedPointCtrl($scope) {
+    $scope.calculate = function() {
+        var x0    = parseFloat($scope.x0);
+        var tol   = parseFloat($scope.tol);
+        var nIter = parseInt($scope.nIter);
+        var f     = Parser.parse($scope.equation_f);
+        var g     = Parser.parse($scope.equation_g);
 
+        var fx0 = f.evaluate({x : x0});
+        var error = tol + 1;
+        var count = 0;
+
+        while((fx0 != 0) && (error > tol) && (count < nIter)) {
+            var xn = g.evaluate({x : x0});
+            fx0    = f.evaluate({x : xn});
+            error  = Math.abs(xn - x0);
+            x0     = xn;
+            count++; 
+        }
+        if(fx0 === 0) {
+            $scope.root = x0;
+        } else {
+            if(error < tol) {
+                $scope.root = "Root aproximation at " + x0 
+                + " with a tolerance of " + tol;
+            } else {
+                $scope.root = "Failure after " + count + " iterations.";
+            }
+        }
+    }
 }
 
 function NewtonCtrl($scope) {
