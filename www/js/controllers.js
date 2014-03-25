@@ -351,9 +351,9 @@ function MultipleRootsCtrl($scope)
         while( (error>tol) && (fx0 != 0) && (den != 0) && (count < nIter))
         {
             var xn = x0-((fx0*f1x0)/den);
-            fx0   = f.evaluate({x:x0});
-            f1x0  = f1.evaluate({x:x0});
-            f2x0  = f2.evaluate({x:x0});
+            fx0   = f.evaluate({x:xn});
+            f1x0  = f1.evaluate({x:xn});
+            f2x0  = f2.evaluate({x:xn});
             error = Math.abs(xn-x0);
             x0 = xn;
             den   = (f1x0*f1x0) - (fx0*f2x0);
