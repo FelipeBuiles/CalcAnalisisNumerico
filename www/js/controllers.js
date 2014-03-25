@@ -327,6 +327,54 @@ function SecantCtrl($scope)
     }
 }
 
-function MultipleRootsCtrl($scope) {
+function MultipleRootsCtrl($scope)
+{
+    $scope.calculate = function()
+    {
+        var f     = Parser.parse($scope.equation_f);
+        var f1    = Parser.parse($scope.equation_f1);
+        var f2    = Parser.parse($scope.equation_f2);
+        var x0    = parseFloat($scope.x0);
+        var tol   = parseFloat($scope.tol);
+        var nIter = parseInt($scope.nIter);
 
+        graph(f);
+
+        var fx0  = f.evaluate({x:x0});
+        var f1x0 = f1.evaluate({x:x0});
+        var f2x0 = f2.evaluate({x:x0});
+
+        var count = 0;
+        var error = tol + 1;
+        var den   = (f1x0*f1x0) - (fx0*f2x0);
+
+        while( (error>tol) && (fx0 != 0) && (den != 0) && (count < nIter))
+        {
+            var xn = x0-((fx0*f1x0)/den);
+            fx0   = f.evaluate({x:x0});
+            f1x0  = f1.evaluate({x:x0});
+            f2x0  = f2.evaluate({x:x0});
+            error = Math.abs(xn-x0);
+            x0 = xn;
+            den   = (f1x0*f1x0) - (fx0*f2x0);
+            count++;
+        }
+        if(fx0 === 0)
+        {
+            $scope.root = x0;
+        } else {
+            if(error<tol)
+            {
+                $scope.root = "Root approximation at " + x0
+                + " with a tolerance of " + tol;
+            } else {
+                if(den === 0)
+                {   
+                    $scope.root = "Posible multiple root";
+                } else {
+                    $scope.root = "Failure after " + count + " iterations.";
+                }
+            }
+        }
+    }
 }
