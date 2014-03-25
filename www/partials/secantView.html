@@ -1,0 +1,36 @@
+<div class="topcoat-navigation-bar" ng-controller="HomeCtrl">
+    <div class="topcoat-navigation-bar__item left quarter">
+        <a class="topcoat-icon-button--quiet" ng-click="slidePage('/','modal')">
+            <span class="topcoat-icon home-icon"></span>
+        </a>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+        <h1 class="topcoat-navigation-bar__title">Secant</h1>
+    </div>
+    <div class="topcoat-navigation-bar__item right quarter">
+        <a class="topcoat-icon-button--quiet" ng-click="changeSettings()">
+            <span class="topcoat-icon settings-icon"></span>
+        </a>
+    </div>
+</div>
+<div>
+    <form ng-submit="calculate()">
+        <dl>
+            <dt><h4>f(x):</h4></dt>
+            <dd><input type="text" class="topcoat-text-input" ng-model="equation_f"></input></dd>
+            <dt><h4>X0:</h4></dt>
+            <dd><input type="text" class="topcoat-text-input" ng-model="x0"></input><br></dd>
+            <dt><h4>X1:</h4></dt>
+            <dd><input type="text" class="topcoat-text-input" ng-model="x1"></input></dd>
+            <dt><h4># of iterations:</h4></dt>
+            <dd><input type="text" class="topcoat-text-input" ng-model="nIter"></input></dd>
+            <dt><h4>Tolerance:</h4></dt>
+            <dd><input type="text" class="topcoat-text-input" ng-model="tol"></input></dd>
+        </dl>
+        <input class="topcoat-button" type="submit" value="DO EET">
+    </form>
+    <canvas id="canvas" width="300" height="300">
+    </canvas>
+    <hr>
+    <h4>{{ root }}</h4>
+</div>

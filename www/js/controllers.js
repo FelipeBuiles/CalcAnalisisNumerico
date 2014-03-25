@@ -271,8 +271,60 @@ function NewtonCtrl($scope) {
     }
 }
 
-function SecantCtrl($scope) {
+function SecantCtrl($scope)
+{
+    $scope.calculate = function()
+    {
+        var x0    = parseFloat($scope.x0);
+        var x1    = parseFloat($scope.x1);
+        var nIter = parseInt($scope.nIter);
+        var f     = Parser.parse($scope.equation_f);
+        var tol   = parseFloat($scope.tol);
 
+        graph(f);
+
+        var fx0 = f.evaluate({x:x0});
+
+        if(fx0 === 0)
+        {
+            $scope.root = x0;
+        }else{
+            var fx1   = f.evaluate({x:x1});
+            var count = 0;
+            var error = tol + 1;
+            var den   = fx1 - fx0;
+
+            while( (error>tol) && (fx1 != 0) && (den != 0) && (count < nIter))
+            {
+                var x2 = x1-(fx1*(x1-x0)/den);
+                error  = Math.abs(x2-x1);
+                x0     = x1;
+                fx0    = fx1;
+                x1     = x2;
+                fx1    = f.evaluate({x:x1});
+                den    = fx1 - fx0;
+                count++;
+            }
+
+            if(fx1 === 0)
+            {
+                $scope.root = x1;
+            } else {
+                if(error<tol)
+                {
+                    $scope.root = "Root approximation at " + x1 
+                    + " with a tolerance of " + tol;
+                } else {
+                    if(den === 0)
+                    {   
+                        $scope.root = "Posible multiple root";
+                    } else {
+                        $scope.root = "Failure after " + count + " iterations.";
+                    }
+                }
+            }
+        }
+    }
 }
 
 function MultipleRootsCtrl($scope) {
