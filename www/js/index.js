@@ -30,6 +30,7 @@ var app = {
         window.addEventListener("orientationchange", orientationChange, true);
     },
     onLoad: function() {
+        
     },
    
     // deviceready Event Handler
