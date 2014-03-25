@@ -16,19 +16,21 @@
 <div>
     <form ng-submit="calculate()">
         <dl>
-            <dt><label>f(x):</label></dt>
+            <dt><h4>f(x):</h4></dt>
             <dd><input type="text" class="topcoat-text-input" ng-model="equation_f"></input></dd>
-            <dt><label>f'(x):</label></dt>
+            <dt><h4>f'(x):</h4></dt>
             <dd><input type="text" class="topcoat-text-input" ng-model="equation_g"></input><br></dd>
-            <dt><label>X0:</label></dt>
+            <dt><h4>X0:</h4></dt>
             <dd><input type="text" class="topcoat-text-input" ng-model="x0"></input></dd>
-            <dt><label># of iterations:</label></dt>
+            <dt><h4># of iterations:</h4></dt>
             <dd><input type="text" class="topcoat-text-input" ng-model="nIter"></input></dd>
-            <dt><label>Tolerance:</label></dt>
+            <dt><h4>Tolerance:</h4></dt>
             <dd><input type="text" class="topcoat-text-input" ng-model="tol"></input></dd>
         </dl>
         <input class="topcoat-button" type="submit" value="DO EET">
     </form>
+    <canvas id="canvas" width="300" height="300">
+    </canvas>
     <hr>
-    <h2>{{ root }}</h2>
+    <h4>{{ root }}</h4>
 </div>

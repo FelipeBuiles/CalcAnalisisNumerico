@@ -17,18 +17,20 @@
 	<br>
 	<form ng-submit="calculate()">
 		<dl>
-			<dt><label>Equation:</label></dt>
+			<dt><h4>Equation:</h4></dt>
 			<dd><input type="text" class="topcoat-text-input" ng-model="equation"></input></dd>
-			<dt><label>N. Iterations:</label></dt>
+			<dt><h4>N. Iterations:</h4></dt>
 			<dd><input type="text" class="topcoat-text-input" ng-model="nIter"></input><br></dd>
-			<dt><label>Random Start:</label></dt>
+			<dt><h4>Random Start:</h4></dt>
 			<dd><input type="text" class="topcoat-text-input" ng-model="x0"></input></dd>
-			<dt><label>Delta:</label></dt>
+			<dt><h4>Delta:</h4></dt>
 			<dd><input type="text" class="topcoat-text-input" ng-model="delta"></input></dd>
 		</dl>
 
 		<input class="topcoat-button" type="submit" value="DO EET">
 	</form>
-	<hr>
-	<h1>{{ root }}</h1>
+    <canvas id="canvas" width="300" height="300">
+    </canvas>
+    <hr>
+    <h4>{{ root }}</h4>
 </div>
