@@ -1,7 +1,39 @@
 <div class="topcoat-overlay-bg" ng-show="showSettings" ></div>
 <aside id='settingsOverlay2' ng-show="showSettings" class="topcoat-overlay"  ng-controller="HomeCtrl">
-    <h1>Version {{' %VERSION%' | interpolate}}</h1>
+    <h1>
+    	In this section you will find the way of using every operation, function or constant avaliable on our application. 
+    	<br><br>
+		Operations:
+		<br>
+		Seno       = sin(x), sen(x)<br>
+		Arc Seno   = asin(x), sen(x)<br>
+		Coseno     = cos(x)<br>
+		Arc Coseno = acos(x)<br>
+		Tangente   = tan(x)<br>
+		Arc Tangente = atan(x)<br>
+		Raiz       = sqrt(x)<br>
+		Logaritmo  = log(x)<br>
+		Valor absoluto = abs(x)<br>
+		Exponente  = ^<br>
+		Concat     = ||<br>
+		Module     = %<br>
+		<br>
+		Functions:
+		<br>
+		Random    = random(x)<br>
+		Factorial = fac(x)<br>
+		Minimum   = min(x)<br>
+		Maximum   = max(x)<br>
+		Pow       = pow(x,y)<br>
+		<br>	
+		Constants:
+		<br>
+		Epsilon = e, E<br>
+		Pi     = pi, PI
+    </h1>
     <div class="topcoat-overlay-buttons">
+    	
+
         <button role="button" class="topcoat-button--cta" ng-click="closeOverlay()">Ok</button>
     </div>
 </aside>
