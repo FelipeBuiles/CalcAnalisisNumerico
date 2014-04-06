@@ -110,6 +110,12 @@ function IncrementalSearchCtrl($scope) {
 }
 
 function BisectionCtrl($scope) {
+    var f = localStorage.getItem("f");
+    if(f === null){
+        $scope.f = "";
+    }else{
+        $scope.f = f;
+    }
     $scope.calculate = function() {
         var xi     = parseFloat($scope.xi);
         var xs     = parseFloat($scope.xs);
@@ -163,6 +169,12 @@ function BisectionCtrl($scope) {
 }
 
 function FalsePositionCtrl($scope) {
+    var f = localStorage.getItem("f");
+    if(f === null){
+        $scope.f = "";
+    }else{
+        $scope.f = f;
+    }
     $scope.calculate = function() {
         var xi    = parseFloat($scope.xi);
         var xs    = parseFloat($scope.xs);
@@ -216,6 +228,15 @@ function FalsePositionCtrl($scope) {
 }
 
 function FixedPointCtrl($scope) {
+    var f = localStorage.getItem("f");
+    var g = localStorage.getItem("g");
+    if(f === null && g === null){
+        $scope.f = "";
+        $scope.g = "";
+    }else{
+        $scope.f = f;
+        $scope.g = g;
+    }
     $scope.calculate = function() {
         var x0    = parseFloat($scope.x0);
         var tol   = parseFloat($scope.tol);
@@ -249,6 +270,15 @@ function FixedPointCtrl($scope) {
 }
 
 function NewtonCtrl($scope) {
+    var f  = localStorage.getItem("f");
+    var ff = localStorage.getItem("ff");
+    if(f === null && ff === null){
+        $scope.f = "";
+        $scope.g = "";
+    }else{
+        $scope.f = f;
+        $scope.g = ff;
+    }
     $scope.calculate = function() {
         var x0    = parseFloat($scope.x0);
         var tol   = parseFloat($scope.tol);
@@ -289,6 +319,12 @@ function NewtonCtrl($scope) {
 
 function SecantCtrl($scope)
 {
+    var f = localStorage.getItem("f");
+    if(f === null){
+        $scope.f = "";
+    }else{
+        $scope.f = f;
+    }
     $scope.calculate = function()
     {
         var x0    = parseFloat($scope.x0);
@@ -345,6 +381,18 @@ function SecantCtrl($scope)
 
 function MultipleRootsCtrl($scope)
 {
+    var f   = localStorage.getItem("f");
+    var ff  = localStorage.getItem("ff");
+    var fff = localStorage.getItem("fff");
+    if(f === null && ff === null && fff === null){
+        $scope.f = "";
+        $scope.f1 = "";
+        $scope.f2 = "";
+    }else{
+        $scope.f = f;
+        $scope.f1 = ff;
+        $scope.f2 = fff;
+    }
     $scope.calculate = function()
     {
         var f     = Parser.parse($scope.equation_f);
