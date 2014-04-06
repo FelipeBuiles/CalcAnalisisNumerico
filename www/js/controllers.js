@@ -58,7 +58,23 @@ function funGraph (ctx,axes,func,color,thick) {
     ctx.stroke();
 }
 
+function InsertEquations1Ctrl($scope,navSvc) {
+    $scope.store = function() {
+        localStorage.setItem("f", $scope.equation_f);
+        localStorage.setItem("ff", $scope.equation_ff);
+        localStorage.setItem("fff", $scope.equation_fff);
+        localStorage.setItem("g", $scope.equation_g);
+        navSvc.slidePage('/eqOneVariable');
+    }
+}
+
 function IncrementalSearchCtrl($scope) {
+    var f = localStorage.getItem("f");
+    if (f === null) {
+        $scope.f = "";
+    } else {
+        $scope.f = f;
+    }
     $scope.calculate = function() {
         var f       = Parser.parse($scope.equation);    
         var x0      = parseFloat($scope.x0);

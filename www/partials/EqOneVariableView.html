@@ -1,0 +1,52 @@
+<div class="topcoat-navigation-bar">
+    <div class="topcoat-navigation-bar__item left quarter">
+        <a class="topcoat-icon-button--quiet" ng-click="slidePage('/','modal')">
+            <span class="topcoat-icon home-icon"></span>
+        </a>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+        <h1 class="topcoat-navigation-bar__title">Equations with one variable</h1>
+    </div>
+    <div class="topcoat-navigation-bar__item right quarter">
+        <a class="topcoat-icon-button--quiet" ng-click="changeSettings()">
+            <span class="topcoat-icon settings-icon"></span>
+        </a>
+    </div>
+</div>
+<div class="topcoat-list__container list">
+	<h4 class="topcoat-list__header">First</h4>
+    <ul class="topcoat-list">
+    	<li class="topcoat-list__item" ng-click="slidePage('/insertEquations1')">
+    		Insert Equations
+    	</li>
+    </ul>
+
+    <h4 class="topcoat-list__header">Then, choose a method:</h4>
+    <ul class="topcoat-list">
+        <li class="topcoat-list__item" ng-click="slidePage('/incrementalSearch')">
+            Incremental Search
+        </li>
+        <li class="topcoat-list__item" ng-click="slidePage('/bisection')">
+            Bisection
+        </li>
+        <li class="topcoat-list__item" ng-click="slidePage('/falsePosition')">
+            False Position
+        </li>
+        <li class="topcoat-list__item" ng-click="slidePage('/fixedPoint')">
+            Fixed Point
+        </li>
+        <li class="topcoat-list__item" ng-click="slidePage('/newton')">
+            Newton
+        </li>
+        <li class="topcoat-list__item" ng-click="slidePage('/secant')">
+            Secant
+        </li>
+        <li class="topcoat-list__item" ng-click="slidePage('/multipleRoots')">
+            Multiple Roots
+        </li>  
+    </ul>
+
+    <div class="topcoat-navigation-bar">
+    </div>
+</div>
+<ng-include src="'partials/settingsOverlay.html'"></ng-include>  

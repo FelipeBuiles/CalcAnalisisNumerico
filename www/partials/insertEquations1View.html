@@ -5,7 +5,7 @@
         </a>
     </div>
     <div class="topcoat-navigation-bar__item center half">
-        <h1 class="topcoat-navigation-bar__title">Incremental Search</h1>
+        <h1 class="topcoat-navigation-bar__title">Insert Equations</h1>
     </div>
     <div class="topcoat-navigation-bar__item right quarter">
         <a class="topcoat-icon-button--quiet" ng-click="changeSettings()">
@@ -15,20 +15,18 @@
 </div>
 <div class="input">
 	<br>
-	<form ng-submit="calculate()">
+	<form ng-submit="store()">
 		<dl>
 			<dt><h4>f(x):</h4></dt>
-			<dd><input type="text" class="topcoat-text-input" placeholder="{{ f }}" ng-model="equation"></input></dd>
-			<dt><h4>N. Iterations:</h4></dt>
-			<dd><input type="text" class="topcoat-text-input" ng-model="nIter"></input><br></dd>
-			<dt><h4>X0:</h4></dt>
-			<dd><input type="text" class="topcoat-text-input" ng-model="x0"></input></dd>
-			<dt><h4>Delta:</h4></dt>
-			<dd><input type="text" class="topcoat-text-input" ng-model="delta"></input></dd>
+			<dd><input type="text" class="topcoat-text-input" ng-model="equation_f"></input></dd>
+			<dt><h4>f'(x):</h4></dt>
+			<dd><input type="text" class="topcoat-text-input" ng-model="equation_ff"></input><br></dd>
+			<dt><h4>f''(x):</h4></dt>
+			<dd><input type="text" class="topcoat-text-input" ng-model="equation_fff"></input></dd>
+			<dt><h4>g(x):</h4></dt>
+			<dd><input type="text" class="topcoat-text-input" ng-model="equation_g"></input></dd>
 		</dl>
 
 		<input class="topcoat-button" type="submit" value="DO EET">
 	</form>
-    <hr>
-    <h4>{{ root }}</h4>
 </div>
