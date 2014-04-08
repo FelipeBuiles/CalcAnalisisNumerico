@@ -5,7 +5,7 @@
         </a>
     </div>
     <div class="topcoat-navigation-bar__item center half">
-        <h1 class="topcoat-navigation-bar__title">Insert Equations</h1>
+        <h1 class="topcoat-navigation-bar__title">Graph</h1>
     </div>
     <div class="topcoat-navigation-bar__item right quarter">
         <a class="topcoat-icon-button--quiet" ng-click="changeSettings()">
@@ -15,18 +15,11 @@
 </div>
 <div class="input">
 	<br>
-	<form ng-submit="store()">
-		<dl>
-			<dt><h4>f(x):</h4></dt>
-			<dd><input type="text" class="topcoat-text-input" ng-model="equation_f"></input></dd>
-			<dt><h4>f'(x):</h4></dt>
-			<dd><input type="text" class="topcoat-text-input" ng-model="equation_ff"></input><br></dd>
-			<dt><h4>f''(x):</h4></dt>
-			<dd><input type="text" class="topcoat-text-input" ng-model="equation_fff"></input></dd>
-			<dt><h4>g(x):</h4></dt>
-			<dd><input type="text" class="topcoat-text-input" ng-model="equation_g"></input></dd>
-		</dl>
-
+	<form ng-submit="graph()">
+		<input type="text" class="topcoat-text-input" placeholder="{{ f }}" ng-model="f"></input>
 		<input class="topcoat-button" type="submit" value="DO EET">
 	</form>
+    <hr>
+    <canvas id="canvas" width="300" height="300">
+    </canvas>
 </div>

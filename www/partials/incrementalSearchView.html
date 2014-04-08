@@ -1,7 +1,7 @@
 <div class="topcoat-navigation-bar" ng-controller="HomeCtrl">
     <div class="topcoat-navigation-bar__item left quarter">
         <a class="topcoat-icon-button--quiet" ng-click="slidePage('/eqOneVariable','modal')">
-            <span class="topcoat-icon arrowleft"></span>
+            <span class="icomatic icon">arrowleft</span>
         </a>
     </div>
     <div class="topcoat-navigation-bar__item center half">
@@ -18,7 +18,7 @@
 	<form ng-submit="calculate()">
 		<dl>
 			<dt><h4>f(x):</h4></dt>
-			<dd><input type="text" class="topcoat-text-input" placeholder="{{ f }}" ng-model="equation"></input></dd>
+			<dd><input type="text" class="topcoat-text-input" placeholder="{{ f }}" ng-model="f"></input></dd>
 			<dt><h4>N. Iterations:</h4></dt>
 			<dd><input type="text" class="topcoat-text-input" ng-model="nIter"></input><br></dd>
 			<dt><h4>X0:</h4></dt>
@@ -31,4 +31,10 @@
 	</form>
     <hr>
     <h4>{{ root }}</h4>
+    <table id="table" style="width:300px">
+        <tr id="heading">
+          <th>X</th>
+          <th>Y</th>
+        </tr>
+    </table>
 </div>

@@ -21,6 +21,9 @@ var myApp = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.d
         $routeProvider.when('/insertEquations1',
             {templateUrl: 'partials/insertEquations1View.html',
             controller: 'InsertEquations1Ctrl'});
+        $routeProvider.when('/graph',
+            {templateUrl: 'partials/graphView.html',
+            controller: 'GraphCtrl'});
         $routeProvider.when('/incrementalSearch',   
             {templateUrl: 'partials/incrementalSearchView.html', 
              controller: 'IncrementalSearchCtrl'});

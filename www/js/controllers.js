@@ -68,41 +68,71 @@ function InsertEquations1Ctrl($scope,navSvc) {
     }
 }
 
+function GraphCtrl($scope) {
+    var f = localStorage.getItem("f");
+    if (f === "undefined" || f === null) {
+        $scope.f = "";
+    } else {
+        $scope.f = f;
+    }
+    $scope.graph = function() {
+        f = Parser.parse($scope.f);
+        graph(f);
+    }
+}
+
 function IncrementalSearchCtrl($scope) {
     var f = localStorage.getItem("f");
-    if (f === null) {
+    if (f === "undefined" || f === null) {
         $scope.f = "";
     } else {
         $scope.f = f;
     }
     $scope.calculate = function() {
-        var f       = Parser.parse($scope.equation);    
+        var f       = Parser.parse($scope.f);    
         var x0      = parseFloat($scope.x0);
         var delta   = parseFloat($scope.delta);
         var nIter   = parseInt($scope.nIter);
-        graph(f);
-
+        var table   = document.getElementById("table");
         var fx0 = f.evaluate({x:x0});
+        var fila = table.insertRow(table.rows.length);
+        var celdaX = fila.insertCell(0);
+        var celdaY = fila.insertCell(1);
+        celdaX.innerHTML = x0;
+        celdaY.innerHTML = fx0;
         if(fx0 === 0) {
             $scope.root = x0;
         } else {
             var x1 = x0 + delta;
             var counter = 1;
             var fx1 = f.evaluate({x:x1});
+            fila = table.insertRow(table.rows.length);
+            celdaX = fila.insertCell(0);
+            celdaY = fila.insertCell(1);
+            celdaX.innerHTML = x1;
+            celdaY.innerHTML = fx1;
             while((fx0*fx1 > 0) && (counter <= nIter)) {
                 x0 = x1;
                 fx0 = fx1;
                 x1 = x0 + delta;
                 fx1 = f.evaluate({x:x1});
+                fila = table.insertRow(table.rows.length);
+                celdaX = fila.insertCell(0);
+                celdaY = fila.insertCell(1);
+                celdaX.innerHTML = x1;
+                celdaY.innerHTML = fx1;
                 counter++;
             }
             if(fx1 === 0){
                 $scope.root = x1;
+                alert($scope.root);
             } else {
                 if(fx0*fx1 < 0) {
                     $scope.root = "(" + x0 + "," + x1 + ")";
+                    alert($scope.root);
                 } else {
                     $scope.root = "failure after " + counter + " iterations";
+                    alert($scope.root);
                 }
             }
         }
@@ -111,7 +141,7 @@ function IncrementalSearchCtrl($scope) {
 
 function BisectionCtrl($scope) {
     var f = localStorage.getItem("f");
-    if(f === null){
+    if(f === "undefined" || f === null){
         $scope.f = "";
     }else{
         $scope.f = f;
@@ -121,8 +151,7 @@ function BisectionCtrl($scope) {
         var xs     = parseFloat($scope.xs);
         var tol    = parseFloat($scope.tol);
         var nIter  = parseInt($scope.nIter);
-        var f      = Parser.parse($scope.equation);
-        graph(f);
+        var f      = Parser.parse($scope.f);
 
         var fxi = f.evaluate({x : xi});
         var fxs = f.evaluate({x : xs});
@@ -156,12 +185,15 @@ function BisectionCtrl($scope) {
                     } else {
                         if(error < tol) {
                             $scope.root = xm + " is a root approximation with a tolerance of " + tol;
+                            alert($scope.root);
                         } else {
                             $scope.root = "failure after" + nIter + " iterations";
+                            alert($scope.root);
                         }
                     }
                 } else {
                     $scope.root = "invalid interval";
+                    alert($scope.root);
                 }
             }
         }
@@ -170,7 +202,7 @@ function BisectionCtrl($scope) {
 
 function FalsePositionCtrl($scope) {
     var f = localStorage.getItem("f");
-    if(f === null){
+    if(f === "undefined" || f === null){
         $scope.f = "";
     }else{
         $scope.f = f;
@@ -180,8 +212,7 @@ function FalsePositionCtrl($scope) {
         var xs    = parseFloat($scope.xs);
         var tol   = parseFloat($scope.tol);
         var nIter = parseInt($scope.nIter);
-        var f     = Parser.parse($scope.equation);
-        graph(f);
+        var f     = Parser.parse($scope.f);
 
         var fxi = f.evaluate({x : xi});
         var fxs = f.evaluate({x : xs});
@@ -215,12 +246,15 @@ function FalsePositionCtrl($scope) {
                     } else {
                         if(error < tol) {
                             $scope.root = xm + " is a root approximation with a tolerance of " + tol;
+                            alert($scope.root);
                         } else {
                             $scope.root = "failure after" + nIter + " iterations";
+                            alert($scope.root);
                         }
                     }
                 } else {
                     $scope.root = "invalid interval";
+                    alert($scope.root);
                 }
             }
         }
@@ -230,20 +264,22 @@ function FalsePositionCtrl($scope) {
 function FixedPointCtrl($scope) {
     var f = localStorage.getItem("f");
     var g = localStorage.getItem("g");
-    if(f === null && g === null){
+    if(f === "undefined" || f === null){
         $scope.f = "";
-        $scope.g = "";
     }else{
         $scope.f = f;
+    }
+    if(g === "undefined" || g === null) {
+        $scope.g = "";
+    } else {
         $scope.g = g;
     }
     $scope.calculate = function() {
         var x0    = parseFloat($scope.x0);
         var tol   = parseFloat($scope.tol);
         var nIter = parseInt($scope.nIter);
-        var f     = Parser.parse($scope.equation_f);
-        var g     = Parser.parse($scope.equation_g);
-        graph(f);
+        var f     = Parser.parse($scope.f);
+        var g     = Parser.parse($scope.g);
 
         var fx0 = f.evaluate({x : x0});
         var error = tol + 1;
@@ -262,8 +298,10 @@ function FixedPointCtrl($scope) {
             if(error < tol) {
                 $scope.root = "Root aproximation at " + x0 
                 + " with a tolerance of " + tol;
+                alert($scope.root);
             } else {
                 $scope.root = "Failure after " + count + " iterations.";
+                alert($scope.root);
             }
         }
     }
@@ -272,30 +310,33 @@ function FixedPointCtrl($scope) {
 function NewtonCtrl($scope) {
     var f  = localStorage.getItem("f");
     var ff = localStorage.getItem("ff");
-    if(f === null && ff === null){
+    if(f === "undefined" || f === null){
         $scope.f = "";
-        $scope.g = "";
     }else{
         $scope.f = f;
-        $scope.g = ff;
+    }
+    if(ff === "undefined" || ff === null) {
+        $scope.ff = "";
+    } else {
+        $scope.ff = ff;
     }
     $scope.calculate = function() {
         var x0    = parseFloat($scope.x0);
         var tol   = parseFloat($scope.tol);
         var nIter = parseInt($scope.nIter);
-        var f     = Parser.parse($scope.equation_f);
-        var g     = Parser.parse($scope.equation_g);
+        var f     = Parser.parse($scope.f);
+        var ff    = Parser.parse($scope.ff);
         graph(f);
         
         var fx0   = f.evaluate({x : x0});
-        var dfx0  = g.evaluate({x : x0});
+        var dfx0  = ff.evaluate({x : x0});
         var error = tol + 1;
         var count = 0;
 
         while((fx0 != 0) && (error > tol) && (dfx0 != 0) && (count < nIter)) {
             var xn = x0 - fx0 / dfx0;
             fx0    = f.evaluate({x : xn});
-            dfx0   = g.evaluate({x : xn});
+            dfx0   = ff.evaluate({x : xn});
             error  = Math.abs(xn - x0);
             x0     = xn;
             count++; 
@@ -306,11 +347,14 @@ function NewtonCtrl($scope) {
             if(error < tol) {
                 $scope.root = "Root approximation at " + x0 
                 + " with a tolerance of " + tol;
+                alert($scope.root);
             } else {
                 if(dfx0 === 0) {
-                    $scope.root = xn + " may be a multiple root."
+                    $scope.root = xn + " may be a multiple root.";
+                    alert($scope.root);
                 } else {
                     $scope.root = "Failure after " + count + " iterations.";
+                    alert($scope.root);
                 }
             }
         }
@@ -320,7 +364,7 @@ function NewtonCtrl($scope) {
 function SecantCtrl($scope)
 {
     var f = localStorage.getItem("f");
-    if(f === null){
+    if(f === "undefined" || f === null){
         $scope.f = "";
     }else{
         $scope.f = f;
@@ -330,7 +374,7 @@ function SecantCtrl($scope)
         var x0    = parseFloat($scope.x0);
         var x1    = parseFloat($scope.x1);
         var nIter = parseInt($scope.nIter);
-        var f     = Parser.parse($scope.equation_f);
+        var f     = Parser.parse($scope.f);
         var tol   = parseFloat($scope.tol);
 
         graph(f);
@@ -366,12 +410,15 @@ function SecantCtrl($scope)
                 {
                     $scope.root = "Root approximation at " + x1 
                     + " with a tolerance of " + tol;
+                    alert($scope.root);
                 } else {
                     if(den === 0)
                     {   
                         $scope.root = "Posible multiple root";
+                        alert($scope.root);
                     } else {
                         $scope.root = "Failure after " + count + " iterations.";
+                        alert($scope.root);
                     }
                 }
             }
@@ -384,29 +431,33 @@ function MultipleRootsCtrl($scope)
     var f   = localStorage.getItem("f");
     var ff  = localStorage.getItem("ff");
     var fff = localStorage.getItem("fff");
-    if(f === null && ff === null && fff === null){
+    if(f === "undefined" || f === null){
         $scope.f = "";
-        $scope.f1 = "";
-        $scope.f2 = "";
     }else{
         $scope.f = f;
-        $scope.f1 = ff;
-        $scope.f2 = fff;
+    }
+    if(ff === "undefined" || ff === null) {
+        $scope.ff = "";
+    } else {
+        $scope.ff = ff;
+    }
+    if(fff === "undefined" || fff === null) {
+        $scope.fff = "";
+    } else {
+        $scope.fff = fff;
     }
     $scope.calculate = function()
     {
-        var f     = Parser.parse($scope.equation_f);
-        var f1    = Parser.parse($scope.equation_f1);
-        var f2    = Parser.parse($scope.equation_f2);
+        var f     = Parser.parse($scope.f);
+        var f1    = Parser.parse($scope.ff);
+        var f2    = Parser.parse($scope.fff);
         var x0    = parseFloat($scope.x0);
         var tol   = parseFloat($scope.tol);
         var nIter = parseInt($scope.nIter);
 
-        graph(f);
-
         var fx0  = f.evaluate({x:x0});
-        var f1x0 = f1.evaluate({x:x0});
-        var f2x0 = f2.evaluate({x:x0});
+        var f1x0 = ff.evaluate({x:x0});
+        var f2x0 = fff.evaluate({x:x0});
 
         var count = 0;
         var error = tol + 1;
@@ -416,8 +467,8 @@ function MultipleRootsCtrl($scope)
         {
             var xn = x0-((fx0*f1x0)/den);
             fx0   = f.evaluate({x:xn});
-            f1x0  = f1.evaluate({x:xn});
-            f2x0  = f2.evaluate({x:xn});
+            f1x0  = ff.evaluate({x:xn});
+            f2x0  = fff.evaluate({x:xn});
             error = Math.abs(xn-x0);
             x0 = xn;
             den   = (f1x0*f1x0) - (fx0*f2x0);
@@ -431,12 +482,15 @@ function MultipleRootsCtrl($scope)
             {
                 $scope.root = "Root approximation at " + x0
                 + " with a tolerance of " + tol;
+                alert($scope.root);
             } else {
                 if(den === 0)
                 {   
                     $scope.root = "Posible multiple root";
+                    alert($scope.root);
                 } else {
                     $scope.root = "Failure after " + count + " iterations.";
+                    alert($scope.root);
                 }
             }
         }
