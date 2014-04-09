@@ -81,6 +81,75 @@ function GraphCtrl($scope) {
     }
 }
 
+function IncrementalSearchTable(x0,fx0)
+{
+    var table  = document.getElementById("table");
+    var fila   = table.insertRow(table.rows.length);
+    var celdaX = fila.insertCell(0);
+    var celdaY = fila.insertCell(1);
+    celdaX.innerHTML = x0;
+    celdaY.innerHTML = fx0;
+}
+
+function BisectFalseTable(xi,xs,xm,fxm,error)
+{
+    var table   = document.getElementById("table");
+    var fila    = table.insertRow(table.rows.length);
+    var celdaXi = fila.insertCell(0);
+    var celdaXs = fila.insertCell(1);
+    var celdaXm = fila.insertCell(2);
+    var celdaFxm = fila.insertCell(3);
+    var celdaError = fila.insertCell(4);
+    celdaXi.innerHTML  = xi;
+    celdaXs.innerHTML  = xs;
+    celdaXm.innerHTML  = xm;
+    celdaFxm.innerHTML = fxm;
+    celdaError.innerHTML = error;
+}
+
+function FixedSecantTable(x0,fx0,error)
+{
+    var table    = document.getElementById("table");
+    var fila     = table.insertRow(table.rows.length);
+    var celdaXn  = fila.insertCell(0);
+    var celdaFxn = fila.insertCell(1);
+    var celdaError = fila.insertCell(2);
+    celdaXn.innerHTML  = x0;
+    celdaFxn.innerHTML = fx0;
+    celdaError.innerHTML = error;
+}
+
+function NewtonTable(x0,fx0,dfx0,error)
+{
+    var table    = document.getElementById("table");
+    var fila     = table.insertRow(table.rows.length);
+    var celdaXn  = fila.insertCell(0);
+    var celdaFxn = fila.insertCell(1);
+    var celdaFFxn = fila.insertCell(2);
+    var celdaError = fila.insertCell(3);
+    celdaXn.innerHTML  = x0;
+    celdaFxn.innerHTML = fx0;
+    celdaFFxn.innerHTML = dfx0;
+    celdaError.innerHTML = error;
+}
+
+function MulRootsTable(x0,fx0,f1x0,f2x0,error)
+{
+    var table     = document.getElementById("table");
+    var fila      = table.insertRow(table.rows.length);
+    var celdaXn   = fila.insertCell(0);
+    var celdaFxn  = fila.insertCell(1);
+    var celdaFFxn = fila.insertCell(2);
+    var celdaFFFxn = fila.insertCell(3);
+    var celdaError = fila.insertCell(4);
+    celdaXn.innerHTML  = x0;
+    celdaFxn.innerHTML = fx0;
+    celdaFFxn.innerHTML = f1x0;
+    celdaFFFxn.innerHTML = f2x0;
+    celdaError.innerHTML = error;
+}
+
+
 function IncrementalSearchCtrl($scope) {
     var f = localStorage.getItem("f");
     if (f === "undefined" || f === null) {
@@ -93,34 +162,21 @@ function IncrementalSearchCtrl($scope) {
         var x0      = parseFloat($scope.x0);
         var delta   = parseFloat($scope.delta);
         var nIter   = parseInt($scope.nIter);
-        var table   = document.getElementById("table");
         var fx0 = f.evaluate({x:x0});
-        var fila = table.insertRow(table.rows.length);
-        var celdaX = fila.insertCell(0);
-        var celdaY = fila.insertCell(1);
-        celdaX.innerHTML = x0;
-        celdaY.innerHTML = fx0;
+        IncrementalSearchTable(x0,fx0)
         if(fx0 === 0) {
             $scope.root = x0;
         } else {
             var x1 = x0 + delta;
             var counter = 1;
             var fx1 = f.evaluate({x:x1});
-            fila = table.insertRow(table.rows.length);
-            celdaX = fila.insertCell(0);
-            celdaY = fila.insertCell(1);
-            celdaX.innerHTML = x1;
-            celdaY.innerHTML = fx1;
+            IncrementalSearchTable(x0,fx0)
             while((fx0*fx1 > 0) && (counter <= nIter)) {
                 x0 = x1;
                 fx0 = fx1;
                 x1 = x0 + delta;
                 fx1 = f.evaluate({x:x1});
-                fila = table.insertRow(table.rows.length);
-                celdaX = fila.insertCell(0);
-                celdaY = fila.insertCell(1);
-                celdaX.innerHTML = x1;
-                celdaY.innerHTML = fx1;
+                IncrementalSearchTable(x0,fx0)
                 counter++;
             }
             if(fx1 === 0){
@@ -152,7 +208,6 @@ function BisectionCtrl($scope) {
         var tol    = parseFloat($scope.tol);
         var nIter  = parseInt($scope.nIter);
         var f      = Parser.parse($scope.f);
-        var table  = document.getElementById("table");
 
         var fxi = f.evaluate({x : xi});
         var fxs = f.evaluate({x : xs});
@@ -167,51 +222,16 @@ function BisectionCtrl($scope) {
                     var fxm = f.evaluate({x : xm});
                     var counter = 1;
                     var error = tol + 1;
-
-                    var fila   = table.insertRow(table.rows.length);
-                    var celdaXi = fila.insertCell(0);
-                    var celdaXs = fila.insertCell(1);
-                    var celdaXm = fila.insertCell(2);
-                    var celdaFxm = fila.insertCell(3);
-                    var celdaError = fila.insertCell(4);
-                    celdaXi.innerHTML  = xi;
-                    celdaXs.innerHTML  = xs;
-                    celdaXm.innerHTML  = xm;
-                    celdaFxm.innerHTML = fxm;
-                    celdaError.innerHTML = error;
-
-
+                    BisectFalseTable(xi,xs,xm,fxm,error);
                     while((error > tol) && (fxm != 0) && (counter < nIter)) {
                         if(fxi*fxm < 0) {
                             xs = xm;
                             fxs = f.evaluate({x : xm});
-
-                            var fila   = table.insertRow(table.rows.length);
-                            var celdaXi = fila.insertCell(0);
-                            var celdaXs = fila.insertCell(1);
-                            var celdaXm = fila.insertCell(2);
-                            var celdaFxm = fila.insertCell(3);
-                            var celdaError = fila.insertCell(4);
-                            celdaXi.innerHTML  = xi;
-                            celdaXs.innerHTML  = xs;
-                            celdaXm.innerHTML  = xm;
-                            celdaFxm.innerHTML = fxm;
-                            celdaError.innerHTML = error;
+                            BisectFalseTable(xi,xs,xm,fxm,error);
                         } else {
                             xi = xm;
                             fxi = f.evaluate({x : xm});
-
-                            var fila   = table.insertRow(table.rows.length);
-                            var celdaXi = fila.insertCell(0);
-                            var celdaXs = fila.insertCell(1);
-                            var celdaXm = fila.insertCell(2);
-                            var celdaFxm = fila.insertCell(3);
-                            var celdaError = fila.insertCell(4);
-                            celdaXi.innerHTML  = xi;
-                            celdaXs.innerHTML  = xs;
-                            celdaXm.innerHTML  = xm;
-                            celdaFxm.innerHTML = fxm;
-                            celdaError.innerHTML = error;
+                            BisectFalseTable(xi,xs,xm,fxm,error);
                         }
                         var xaux = xm;
                         xm = (xi + xs) / 2;
@@ -219,17 +239,7 @@ function BisectionCtrl($scope) {
                         error = Math.abs(xm - xaux);
                         counter++;
 
-                        var fila   = table.insertRow(table.rows.length);
-                        var celdaXi = fila.insertCell(0);
-                        var celdaXs = fila.insertCell(1);
-                        var celdaXm = fila.insertCell(2);
-                        var celdaFxm = fila.insertCell(3);
-                        var celdaError = fila.insertCell(4);
-                        celdaXi.innerHTML  = xi;
-                        celdaXs.innerHTML  = xs;
-                        celdaXm.innerHTML  = xm;
-                        celdaFxm.innerHTML = fxm;
-                        celdaError.innerHTML = error;
+                        BisectFalseTable(xi,xs,xm,fxm,error);
                     }
                     if(fxm === 0) {
                         $scope.root = xm;
@@ -278,19 +288,23 @@ function FalsePositionCtrl($scope) {
                     var fxm = f.evaluate({x : xm});
                     var counter = 1;
                     var error = tol + 1;
+                    BisectFalseTable(xi,xs,xm,fxm,error);
                     while((error > tol) && (fxm != 0) && (counter < nIter)) {
                         if(fxi*fxm < 0) {
                             xs = xm;
                             fxs = f.evaluate({x : xm});
+                            BisectFalseTable(xi,xs,xm,fxm,error);
                         } else {
                             xi = xm;
                             fxi = f.evaluate({x : xm});
+                            BisectFalseTable(xi,xs,xm,fxm,error);
                         }
                         var xaux = xm;
                         xm = xi - (fxi * (xs-xi) / (fxs - fxi));
                         fxm = f.evaluate({x : xm});
                         error = Math.abs(xm - xaux);
                         counter++;
+                        BisectFalseTable(xi,xs,xm,fxm,error);
                     }
                     if(fxm === 0) {
                         $scope.root = xm;
@@ -335,6 +349,7 @@ function FixedPointCtrl($scope) {
         var fx0 = f.evaluate({x : x0});
         var error = tol + 1;
         var count = 0;
+        FixedPointTable(x0,fx0,error);
 
         while((fx0 != 0) && (error > tol) && (count < nIter)) {
             var xn = g.evaluate({x : x0});
@@ -342,6 +357,7 @@ function FixedPointCtrl($scope) {
             error  = Math.abs(xn - x0);
             x0     = xn;
             count++; 
+            FixedPointTable(x0,fx0,error);
         }
         if(fx0 === 0) {
             $scope.root = x0;
@@ -376,13 +392,14 @@ function NewtonCtrl($scope) {
         var tol   = parseFloat($scope.tol);
         var nIter = parseInt($scope.nIter);
         var f     = Parser.parse($scope.f);
-        var ff    = Parser.parse($scope.ff);
+        var ff    = Parser.parse($scope.g);
         graph(f);
         
         var fx0   = f.evaluate({x : x0});
         var dfx0  = ff.evaluate({x : x0});
         var error = tol + 1;
         var count = 0;
+        NewtonTable(x0,fx0,dfx0,error);
 
         while((fx0 != 0) && (error > tol) && (dfx0 != 0) && (count < nIter)) {
             var xn = x0 - fx0 / dfx0;
@@ -391,6 +408,7 @@ function NewtonCtrl($scope) {
             error  = Math.abs(xn - x0);
             x0     = xn;
             count++; 
+            NewtonTable(x0,fx0,dfx0,error);
         }
         if(fx0 === 0) {
             $scope.root = x0;
@@ -428,8 +446,6 @@ function SecantCtrl($scope)
         var f     = Parser.parse($scope.f);
         var tol   = parseFloat($scope.tol);
 
-        graph(f);
-
         var fx0 = f.evaluate({x:x0});
 
         if(fx0 === 0)
@@ -440,6 +456,7 @@ function SecantCtrl($scope)
             var count = 0;
             var error = tol + 1;
             var den   = fx1 - fx0;
+            FixedSecantTable(x0,fx0,error);
 
             while( (error>tol) && (fx1 != 0) && (den != 0) && (count < nIter))
             {
@@ -451,6 +468,7 @@ function SecantCtrl($scope)
                 fx1    = f.evaluate({x:x1});
                 den    = fx1 - fx0;
                 count++;
+                FixedSecantTable(x0,fx0,error);
             }
 
             if(fx1 === 0)
@@ -507,23 +525,26 @@ function MultipleRootsCtrl($scope)
         var nIter = parseInt($scope.nIter);
 
         var fx0  = f.evaluate({x:x0});
-        var f1x0 = ff.evaluate({x:x0});
-        var f2x0 = fff.evaluate({x:x0});
+        var f1x0 = f1.evaluate({x:x0});
+        var f2x0 = f2.evaluate({x:x0});
 
         var count = 0;
         var error = tol + 1;
         var den   = (f1x0*f1x0) - (fx0*f2x0);
 
+        MulRootsTable(x0,fx0,f1x0,f2x0,error);
+
         while( (error>tol) && (fx0 != 0) && (den != 0) && (count < nIter))
         {
             var xn = x0-((fx0*f1x0)/den);
             fx0   = f.evaluate({x:xn});
-            f1x0  = ff.evaluate({x:xn});
-            f2x0  = fff.evaluate({x:xn});
+            f1x0  = f1.evaluate({x:xn});
+            f2x0  = f2.evaluate({x:xn});
             error = Math.abs(xn-x0);
             x0 = xn;
             den   = (f1x0*f1x0) - (fx0*f2x0);
             count++;
+            MulRootsTable(x0,fx0,f1x0,f2x0,error);
         }
         if(fx0 === 0)
         {
