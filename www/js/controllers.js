@@ -152,6 +152,7 @@ function BisectionCtrl($scope) {
         var tol    = parseFloat($scope.tol);
         var nIter  = parseInt($scope.nIter);
         var f      = Parser.parse($scope.f);
+        var table  = document.getElementById("table");
 
         var fxi = f.evaluate({x : xi});
         var fxs = f.evaluate({x : xs});
@@ -166,19 +167,69 @@ function BisectionCtrl($scope) {
                     var fxm = f.evaluate({x : xm});
                     var counter = 1;
                     var error = tol + 1;
+
+                    var fila   = table.insertRow(table.rows.length);
+                    var celdaXi = fila.insertCell(0);
+                    var celdaXs = fila.insertCell(1);
+                    var celdaXm = fila.insertCell(2);
+                    var celdaFxm = fila.insertCell(3);
+                    var celdaError = fila.insertCell(4);
+                    celdaXi.innerHTML  = xi;
+                    celdaXs.innerHTML  = xs;
+                    celdaXm.innerHTML  = xm;
+                    celdaFxm.innerHTML = fxm;
+                    celdaError.innerHTML = error;
+
+
                     while((error > tol) && (fxm != 0) && (counter < nIter)) {
                         if(fxi*fxm < 0) {
                             xs = xm;
                             fxs = f.evaluate({x : xm});
+
+                            var fila   = table.insertRow(table.rows.length);
+                            var celdaXi = fila.insertCell(0);
+                            var celdaXs = fila.insertCell(1);
+                            var celdaXm = fila.insertCell(2);
+                            var celdaFxm = fila.insertCell(3);
+                            var celdaError = fila.insertCell(4);
+                            celdaXi.innerHTML  = xi;
+                            celdaXs.innerHTML  = xs;
+                            celdaXm.innerHTML  = xm;
+                            celdaFxm.innerHTML = fxm;
+                            celdaError.innerHTML = error;
                         } else {
                             xi = xm;
                             fxi = f.evaluate({x : xm});
+
+                            var fila   = table.insertRow(table.rows.length);
+                            var celdaXi = fila.insertCell(0);
+                            var celdaXs = fila.insertCell(1);
+                            var celdaXm = fila.insertCell(2);
+                            var celdaFxm = fila.insertCell(3);
+                            var celdaError = fila.insertCell(4);
+                            celdaXi.innerHTML  = xi;
+                            celdaXs.innerHTML  = xs;
+                            celdaXm.innerHTML  = xm;
+                            celdaFxm.innerHTML = fxm;
+                            celdaError.innerHTML = error;
                         }
                         var xaux = xm;
                         xm = (xi + xs) / 2;
                         fxm = f.evaluate({x : xm});
                         error = Math.abs(xm - xaux);
                         counter++;
+
+                        var fila   = table.insertRow(table.rows.length);
+                        var celdaXi = fila.insertCell(0);
+                        var celdaXs = fila.insertCell(1);
+                        var celdaXm = fila.insertCell(2);
+                        var celdaFxm = fila.insertCell(3);
+                        var celdaError = fila.insertCell(4);
+                        celdaXi.innerHTML  = xi;
+                        celdaXs.innerHTML  = xs;
+                        celdaXm.innerHTML  = xm;
+                        celdaFxm.innerHTML = fxm;
+                        celdaError.innerHTML = error;
                     }
                     if(fxm === 0) {
                         $scope.root = xm;
