@@ -401,7 +401,7 @@ function NewtonCtrl($scope) {
         var tol   = parseFloat($scope.tol);
         var nIter = parseInt($scope.nIter);
         var f     = Parser.parse($scope.f);
-        var ff    = Parser.parse($scope.g);
+        var ff    = Parser.parse($scope.ff);
         
         var fx0   = f.evaluate({x : x0});
         var dfx0  = ff.evaluate({x : x0});

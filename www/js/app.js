@@ -44,6 +44,12 @@ var myApp = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.d
              controller: 'SecantCtrl'});     
         $routeProvider.when('/multipleRoots',
             {templateUrl: 'partials/multipleRootsView.html',
-             controller: 'MultipleRootsCtrl'});                                            
+             controller: 'MultipleRootsCtrl'});   
+        $routeProvider.when('/linearEquationSystem',
+            {templateUrl: 'partials/linearEquationSystemView.html',
+             controller: 'HomeCtrl'});
+        $routeProvider.when('/inserMatrix',
+            {templateUrl: 'partials/inserMatrixView.html',
+             controller: 'InserMatrix'});                                              
         $routeProvider.otherwise({redirectTo: '/'});
   }]);
