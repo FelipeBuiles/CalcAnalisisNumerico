@@ -163,6 +163,8 @@ function IncrementalSearchCtrl($scope) {
         var delta   = parseFloat($scope.delta);
         var nIter   = parseInt($scope.nIter);
         var fx0 = f.evaluate({x:x0});
+        var table = document.getElementById("table");
+        table.innerHTML = '<tr id="heading"><th>X</th><th>Y</th></tr>';
         IncrementalSearchTable(x0,fx0)
         if(fx0 === 0) {
             $scope.root = x0;
@@ -187,7 +189,7 @@ function IncrementalSearchCtrl($scope) {
                     $scope.root = "(" + x0 + "," + x1 + ")";
                     alert($scope.root);
                 } else {
-                    $scope.root = "failure after " + counter + " iterations";
+                    $scope.root = "failure after " + nIter + " iterations";
                     alert($scope.root);
                 }
             }
@@ -222,6 +224,8 @@ function BisectionCtrl($scope) {
                     var fxm = f.evaluate({x : xm});
                     var counter = 1;
                     var error = tol + 1;
+                    var table = document.getElementById("table");
+                    table.innerHTML = '<tr id="heading"><th>Xi</th><th>Xs</th><th>Xm</th><th>f(Xm)</th><th>Error</th></tr>';
                     BisectFalseTable(xi,xs,xm,fxm,error);
                     while((error > tol) && (fxm != 0) && (counter < nIter)) {
                         if(fxi*fxm < 0) {
@@ -288,6 +292,8 @@ function FalsePositionCtrl($scope) {
                     var fxm = f.evaluate({x : xm});
                     var counter = 1;
                     var error = tol + 1;
+                    var table = document.getElementById("table");
+                    table.innerHTML = '<tr id="heading"><th>Xi</th><th>Xs</th><th>Xm</th><th>f(Xm)</th><th>Error</th></tr>';
                     BisectFalseTable(xi,xs,xm,fxm,error);
                     while((error > tol) && (fxm != 0) && (counter < nIter)) {
                         if(fxi*fxm < 0) {
@@ -349,6 +355,9 @@ function FixedPointCtrl($scope) {
         var fx0 = f.evaluate({x : x0});
         var error = tol + 1;
         var count = 0;
+        
+        var table = document.getElementById("table");
+        table.innerHTML = '<tr id="heading"><th>Xn</th><th>f(Xn)</th><th>Error</th></tr>';
         FixedPointTable(x0,fx0,error);
 
         while((fx0 != 0) && (error > tol) && (count < nIter)) {
@@ -367,7 +376,7 @@ function FixedPointCtrl($scope) {
                 + " with a tolerance of " + tol;
                 alert($scope.root);
             } else {
-                $scope.root = "Failure after " + count + " iterations.";
+                $scope.root = "Failure after " + nIter + " iterations.";
                 alert($scope.root);
             }
         }
@@ -393,12 +402,14 @@ function NewtonCtrl($scope) {
         var nIter = parseInt($scope.nIter);
         var f     = Parser.parse($scope.f);
         var ff    = Parser.parse($scope.g);
-        graph(f);
         
         var fx0   = f.evaluate({x : x0});
         var dfx0  = ff.evaluate({x : x0});
         var error = tol + 1;
         var count = 0;
+        
+        var table = document.getElementById("table");
+        table.innerHTML = '<tr id="heading"><th>Xn</th><th>f(Xn)</th><th>f&apos;(Xn)</th><th>Error</th></tr>';
         NewtonTable(x0,fx0,dfx0,error);
 
         while((fx0 != 0) && (error > tol) && (dfx0 != 0) && (count < nIter)) {
@@ -422,7 +433,7 @@ function NewtonCtrl($scope) {
                     $scope.root = xn + " may be a multiple root.";
                     alert($scope.root);
                 } else {
-                    $scope.root = "Failure after " + count + " iterations.";
+                    $scope.root = "Failure after " + nIter + " iterations.";
                     alert($scope.root);
                 }
             }
@@ -456,6 +467,9 @@ function SecantCtrl($scope)
             var count = 0;
             var error = tol + 1;
             var den   = fx1 - fx0;
+            
+            var table = document.getElementById("table");
+            table.innerHTML = '<tr id="heading"><th>Xn</th><th>f(Xn)</th><th>Error</th></tr>';
             FixedSecantTable(x0,fx0,error);
 
             while( (error>tol) && (fx1 != 0) && (den != 0) && (count < nIter))
@@ -486,7 +500,7 @@ function SecantCtrl($scope)
                         $scope.root = "Posible multiple root";
                         alert($scope.root);
                     } else {
-                        $scope.root = "Failure after " + count + " iterations.";
+                        $scope.root = "Failure after " + nIter + " iterations.";
                         alert($scope.root);
                     }
                 }
@@ -532,6 +546,8 @@ function MultipleRootsCtrl($scope)
         var error = tol + 1;
         var den   = (f1x0*f1x0) - (fx0*f2x0);
 
+        var table = document.getElementById("table");
+        table.innerHTML = '<tr id="heading"><th>Xn</th><th>f(Xn)</th><th>f&apos;(Xn)</th><th>f&apos;&apos;(Xn)</th><th>Error</th></tr>';
         MulRootsTable(x0,fx0,f1x0,f2x0,error);
 
         while( (error>tol) && (fx0 != 0) && (den != 0) && (count < nIter))
@@ -561,7 +577,7 @@ function MultipleRootsCtrl($scope)
                     $scope.root = "Posible multiple root";
                     alert($scope.root);
                 } else {
-                    $scope.root = "Failure after " + count + " iterations.";
+                    $scope.root = "Failure after " + nIter + " iterations.";
                     alert($scope.root);
                 }
             }
