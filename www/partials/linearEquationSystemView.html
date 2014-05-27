@@ -5,7 +5,7 @@
         </a>
     </div>
     <div class="topcoat-navigation-bar__item center half">
-        <h1 class="topcoat-navigation-bar__title">Equations with one variable</h1>
+        <h1 class="topcoat-navigation-bar__title">Equation Systems</h1>
     </div>
     <div class="topcoat-navigation-bar__item right quarter">
         <a class="topcoat-icon-button--quiet" ng-click="changeSettings()">
@@ -16,15 +16,39 @@
 <div class="topcoat-list__container list">
 	<h4 class="topcoat-list__header">First</h4>
     <ul class="topcoat-list">
-    	<li class="topcoat-list__item" ng-click="slidePage('/insertEquations1')">
+    	<li class="topcoat-list__item" ng-click="promptDegree()">
     		Insert Matrix
     	</li>
     </ul>
 
     <h4 class="topcoat-list__header">Then, choose a method:</h4>
     <ul class="topcoat-list">
-        <li class="topcoat-list__item" ng-click="slidePage('/incrementalSearch')">
+        <li class="topcoat-list__item" ng-click="slidePage('/simple_ge')">
             Simple Gaussian Elimination
+        </li>
+        <li class="topcoat-list__item" ng-click="slidePage('/ge_total')">
+            Gaussian Elimination - Total pivoting
+        </li>
+        <li class="topcoat-list__item" ng-click="slidePage('/ge_partial')">
+            Gaussian Elimination - Partial pivoting
+        </li>
+        <li class="topcoat-list__item" ng-click="slidePage('/ge_stepped')">
+            Gaussian Elimination - Escaloneishon pivoting
+        </li>
+        <li class="topcoat-list__item" ng-click="slidePage('/lu_doolittle')">
+            LU Factorization - Doolittle
+        </li>
+        <li class="topcoat-list__item" ng-click="slidePage('/lu_cholesky')">
+            LU Factorization - Cholesky
+        </li>
+        <li class="topcoat-list__item" ng-click="slidePage('/lu_crout')">
+            LU Factorization - Crout
+        </li>
+        <li class="topcoat-list__item" ng-click="slidePage('/jacobi')">
+            Jacobi
+        </li>
+        <li class="topcoat-list__item" ng-click="slidePage('/gauss-seidel')">
+            Gauss-Seidel
         </li>
     </ul>
 

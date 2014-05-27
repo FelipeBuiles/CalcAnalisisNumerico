@@ -15,6 +15,31 @@ function HomeCtrl($scope,navSvc,$rootScope) {
     $scope.closeOverlay = function () {
         $rootScope.showSettings = false;
     };
+    $scope.promptDegree = function () {
+        $rootScope.matrixSize = prompt("Please enter the matrix size");
+        localStorage.setItem("n", $rootScope.matrixSize);
+        $rootScope.matrix = $scope.createMatrix($scope.matrixSize);
+        $rootScope.vector = $scope.createVector($scope.matrixSize);
+        navSvc.slidePage('/insertMatrix');
+    };
+    $scope.createMatrix = function(matSize) {
+        var mat = [];
+        for(var i=0; i<matSize; i++) {
+            var row = [];
+            for(var j=0; j<matSize; j++) {
+                row.push({ value : ""});
+            }
+            mat.push(row);
+        }
+        return mat;
+    };
+    $scope.createVector = function(matSize) {
+        var b = [];
+        for(var i=0; i<matSize; i++) {
+            b.push({value : ""});
+        }
+        return b;
+    }
 }
 
 function graph(f) {
@@ -66,6 +91,72 @@ function InsertEquations1Ctrl($scope,navSvc) {
         localStorage.setItem("g", $scope.equation_g);
         navSvc.slidePage('/eqOneVariable');
     }
+}
+
+function InsertMatrixCtrl($scope,navSvc) {
+    $scope.store = function() {
+        for(var i=0; i<$scope.matrix.length; i++) {
+            for(var j=0; j<$scope.matrix[0].length; j++) {
+                localStorage.setItem("A"+i+j, $scope.matrix[i][j].value);
+            }
+            localStorage.setItem("b"+i, $scope.vector[i].value);
+        }
+        navSvc.slidePage('/linearEquations')
+    }
+}
+
+function getMat(n) {
+    var mat = [];
+    for(var i=0; i<n; i++) {
+        var row = [];
+        for(var j=0; j<n; j++) {
+            row.push(parseFloat(localStorage.getItem("A"+i+j)));
+        }
+        row.push(parseFloat(localStorage.getItem("b"+i)));
+        mat.push(row);
+    }
+    return mat;
+}
+
+function drawtTable(mat) {
+        var table = document.getElementById("table");
+    for(var i=0; i<mat.length; i++) {
+        var fila = table.insertRow(table.rows.length);
+        for(var j=0; j<mat[0].length; j++) {
+            celda = fila.insertCell(i);
+            celda.innerHTML = mat[i][j];
+        }
+    }
+}
+
+function simple_geCtrl($scope) {
+    var n = parseFloat(localStorage.getItem("n"));
+    var matAux = getMat(n);
+    for(var k=1; k<n; k++) {
+        for(var i=k+1; i<=n; i++) {
+            if(matAux[i][i] != 0) {
+                var mult = matAux[i][k] / matAux[i][i]
+                for(var j=k; j<=n+1; j++) {
+                    matAux[i][j] -= mult * matAux[k][j]
+                }
+            } else {
+                alert("There's a zero in the diagonal, try another method.")
+            }
+        }
+    }
+    drawTable(matAux);
+}
+
+function ge_partialCtrl($scope) {
+    
+}
+
+function ge_totalCtrl($scope) {
+    
+}
+
+function ge_steppedCtrl($scope) {
+    
 }
 
 function GraphCtrl($scope) {
