@@ -70,7 +70,7 @@ var myApp = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.d
             {templateUrl: 'partials/insertMatrixView.html',
              controller: 'InsertMatrixCtrl'}); 
         $routeProvider.when('/simple_ge',
-            {templateUrl: 'partials/eqSys/simple_geView.html',
+            {templateUrl: 'partials/eqSys/ge_simpleView.html',
              controller: 'simple_geCtrl'});
         $routeProvider.when('/ge_total',
             {templateUrl: 'partials/eqSys/ge_totalView.html',

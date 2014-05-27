@@ -118,33 +118,42 @@ function getMat(n) {
     return mat;
 }
 
-function drawtTable(mat) {
-        var table = document.getElementById("table");
+function drawTable(table, mat) {
+    var celdas = [];
     for(var i=0; i<mat.length; i++) {
-        var fila = table.insertRow(table.rows.length);
+        var filaT = table.insertRow();
+        var fila = [];
         for(var j=0; j<mat[0].length; j++) {
-            celda = fila.insertCell(i);
-            celda.innerHTML = mat[i][j];
+            fila.push(filaT.insertCell());
+        }
+        celdas.push(fila);
+    }
+    for(var i=0; i<mat.length; i++) {
+        for(var j=0; j<mat[0].length; j++) {
+            celdas[mat.length-1-i][mat[0].length-1-j].innerHTML = mat[i][j];
         }
     }
 }
 
 function simple_geCtrl($scope) {
     var n = parseFloat(localStorage.getItem("n"));
-    var matAux = getMat(n);
-    for(var k=1; k<n; k++) {
-        for(var i=k+1; i<=n; i++) {
-            if(matAux[i][i] != 0) {
-                var mult = matAux[i][k] / matAux[i][i]
-                for(var j=k; j<=n+1; j++) {
-                    matAux[i][j] -= mult * matAux[k][j]
+    var a = getMat(n);
+    $scope.calc = function() {
+        for(var k=1; k<n; k++) {
+            for(var i=k; i<n; i++) {
+                if(a[i][i] != 0) {
+                    var mult = a[i][k] / a[k][k]
+                    for(var j=0; j<=n; j++) {
+                        a[i][j] -= mult * a[k][j]
+                    }
+                } else {
+                    alert("There's a zero in the diagonal, try another method.")
                 }
-            } else {
-                alert("There's a zero in the diagonal, try another method.")
             }
         }
+        var table = document.getElementById("table");
+        drawTable(table, a);    
     }
-    drawTable(matAux);
 }
 
 function ge_partialCtrl($scope) {
@@ -156,6 +165,26 @@ function ge_totalCtrl($scope) {
 }
 
 function ge_steppedCtrl($scope) {
+    
+}
+
+function lu_doolittleCtrl($scope) {
+    
+}
+
+function lu_choleskyCtrl($scope) {
+    
+}
+
+function lu_croutCtrl($scope) {
+    
+}
+
+function jacobiCtrl($scope) {
+    
+}
+
+function gauss-seidelCtrl($scope) {
     
 }
 
